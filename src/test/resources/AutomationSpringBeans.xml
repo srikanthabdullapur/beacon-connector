@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+
+
+
+<!--listAttachments-->
+<util:map id="listAttachmentsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--registerBeacon-->
+<util:map id="registerBeaconTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beacon-ref" value="#[payload]"/>
+        <entry key="advertisedIdType" value="EDDYSTONE"/>
+        <entry key="advertisedIdValue" value=""/>
+        <entry key="status" value="ACTIVE"/>
+        <entry key="placeId" value=""/>
+        <entry key="lat" value=""/>
+        <entry key="lng" value=""/>
+        <entry key="indoorLevel" value=""/>
+        <entry key="expectedStability" value=""/>
+        <entry key="description" value=""/>
+        <entry key="properties" value=""/>
+    </util:map>
+<!--activateBeacon-->
+<util:map id="activateBeaconTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--deactivateBeacon-->
+<util:map id="deactivateBeaconTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--decommissionBeacon-->
+<util:map id="decommissionBeaconTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--getBeaconInfo-->
+<util:map id="getBeaconInfoTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--getBeacons-->
+<util:map id="getBeaconsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ </util:map>
+<!--listBeacons-->
+<util:map id="listBeaconsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="query" value=""/>
+    </util:map>
+<!--updateBeacon-->
+<util:map id="updateBeaconTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beacon-ref" value="#[payload]"/>
+        <entry key="advertisedIdType" value="EDDYSTONE"/>
+        <entry key="advertisedIdValue" value=""/>
+        <entry key="status" value="ACTIVE"/>
+        <entry key="placeId" value=""/>
+        <entry key="lat" value=""/>
+        <entry key="lng" value=""/>
+        <entry key="indoorLevel" value=""/>
+        <entry key="expectedStability" value=""/>
+        <entry key="description" value=""/>
+        <entry key="beaconName" value=""/>
+        <entry key="properties" value=""/>
+    </util:map>
+<!--createAttachment-->
+<util:map id="createAttachmentTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+        <entry key="attachment-ref" value="#[payload]"/>
+        <entry key="data" value=""/>
+        <entry key="ProjectId" value=""/>
+        <entry key="dataType" value="String"/>
+    </util:map>
+<!--batchDeleteAttachments-->
+<util:map id="batchDeleteAttachmentsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+    </util:map>
+<!--deleteAttachment-->
+<util:map id="deleteAttachmentTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="beaconName" value=""/>
+        <entry key="attachmentId" value=""/>
+    </util:map>
+</beans>

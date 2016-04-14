@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<connector name="Google Beacon">
+    <properties>
+        <connectivity-support>false</connectivity-support>
+        <OAuth-authentication>true</OAuth-authentication>
+        <metadata>static</metadata>
+        <datasense-enabled>true</datasense-enabled>
+        <transformer>false</transformer>
+    </properties>
+    <global-config credentialsFile="">
+        <config name="config-with-oauth">
+            <attributes>
+                <attribute name="name" use="required" caption="Name" group="Basic Settings" type="name" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="consumerKey" use="required" caption="Consumer Key" group="Connection" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="consumerSecret" use="required" caption="Consumer Secret" group="Connection" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="applicationName" use="optional" caption="Application Name" group="General" type="string" javaType="java.lang.String" default="Mule-GoogleCalendarConnector/1.0" category="General"></attribute>
+                <attribute name="scope" use="optional" caption="Scope" group="Connection" type="string" javaType="java.lang.String" default="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userlocation.beacon.registry" category="General"></attribute>
+                <attribute name="clientFactory-ref" use="optional" caption="Client Factory Reference" group="General" type="string" javaType="org.mule.module.google.beacon.GoogleBeaconClientFactory" category="General"></attribute>
+            </attributes>
+        </config>
+    </global-config>
+    <message-processors>
+        <processor name="authorize" xmlName="authorize" caption="Authorize">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="state" use="optional" caption="State" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="access_type" use="optional" caption="Access_type" group="Additional Authorization Parameters" type="enum" javaType="org.mule.modules.google.AccessType" default="online" category="General"></attribute>
+                <attribute name="force_prompt" use="optional" caption="Force_prompt" group="Additional Authorization Parameters" type="enum" javaType="org.mule.modules.google.ForcePrompt" default="auto" category="General"></attribute>
+                <attribute name="accessTokenId" use="optional" caption="Access Token Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="unauthorize" xmlName="unauthorize" caption="Unauthorize">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="accessTokenId" use="optional" caption="Access Token Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAttachments" xmlName="list-attachments" caption="List attachments">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="registerBeacon" xmlName="register-beacon" caption="Register beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beacon-ref" use="optional" caption="Beacon Reference" group="General" type="string" javaType="org.mule.module.google.beacon.model.Beacon" default="#[payload]" category="General"></attribute>
+                <attribute name="advertisedIdType" use="optional" caption="Advertised Id Type" group="General" type="string" javaType="java.lang.String" default="EDDYSTONE" category="General"></attribute>
+                <attribute name="advertisedIdValue" use="required" caption="Advertised Id Value" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="status" use="optional" caption="Status" group="General" type="string" javaType="java.lang.String" default="ACTIVE" category="General"></attribute>
+                <attribute name="placeId" use="optional" caption="Place Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="lat" use="optional" caption="Lat" group="General" type="string" javaType="java.lang.Double" category="General"></attribute>
+                <attribute name="lng" use="optional" caption="Lng" group="General" type="string" javaType="java.lang.Double" category="General"></attribute>
+                <attribute name="indoorLevel" use="optional" caption="Indoor Level" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="expectedStability" use="optional" caption="Expected Stability" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="description" use="optional" caption="Description" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="properties" use="optional" caption="Properties" group="General" type="element-controller-map" javaType="java.util.Map&lt;java.lang.String,java.lang.String&gt;" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="activateBeacon" xmlName="activate-beacon" caption="Activate beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="deactivateBeacon" xmlName="deactivate-beacon" caption="Deactivate beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="decommissionBeacon" xmlName="decommission-beacon" caption="Decommission beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="getBeaconInfo" xmlName="get-beacon-info" caption="Get beacon info">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="getBeacons" xmlName="get-beacons" caption="Get beacons">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="listBeacons" xmlName="list-beacons" caption="List beacons">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="query" use="required" caption="Query" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="updateBeacon" xmlName="update-beacon" caption="Update beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beacon-ref" use="optional" caption="Beacon Reference" group="General" type="string" javaType="org.mule.module.google.beacon.model.Beacon" default="#[payload]" category="General"></attribute>
+                <attribute name="advertisedIdType" use="optional" caption="Advertised Id Type" group="General" type="string" javaType="java.lang.String" default="EDDYSTONE" category="General"></attribute>
+                <attribute name="advertisedIdValue" use="required" caption="Advertised Id Value" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="status" use="optional" caption="Status" group="General" type="string" javaType="java.lang.String" default="ACTIVE" category="General"></attribute>
+                <attribute name="placeId" use="optional" caption="Place Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="lat" use="optional" caption="Lat" group="General" type="string" javaType="java.lang.Double" category="General"></attribute>
+                <attribute name="lng" use="optional" caption="Lng" group="General" type="string" javaType="java.lang.Double" category="General"></attribute>
+                <attribute name="indoorLevel" use="optional" caption="Indoor Level" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="expectedStability" use="optional" caption="Expected Stability" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="description" use="optional" caption="Description" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="properties" use="optional" caption="Properties" group="General" type="element-controller-map" javaType="java.util.Map&lt;java.lang.String,java.lang.String&gt;" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createAttachment" xmlName="create-attachment" caption="Create attachment">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="attachment-ref" use="optional" caption="Attachment Reference" group="General" type="string" javaType="org.mule.module.google.beacon.model.BeaconAttachment" default="#[payload]" category="General"></attribute>
+                <attribute name="data" use="required" caption="Data" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="ProjectId" use="required" caption="Project Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="dataType" use="optional" caption="Data Type" group="General" type="string" javaType="java.lang.String" default="String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="batchDeleteAttachments" xmlName="batch-delete-attachments" caption="Batch delete attachments">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="deleteAttachment" xmlName="delete-attachment" caption="Delete attachment">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="attachmentId" use="required" caption="Attachment Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+    </message-processors>
+</connector>

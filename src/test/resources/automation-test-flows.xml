@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:google-beacon="http://www.mulesoft.org/schema/mule/google-beacon" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.mulesoft.org/schema/mule/google-beacon http://www.mulesoft.org/schema/mule/google-beacon/current/mule-google-beacon.xsd"
+>
+
+<context:property-placeholder location="automation-credentials.properties" />
+
+<google-beacon:config-with-oauth clientFactory-ref="${google-beacon.clientFactory-ref}" consumerKey="${google-beacon.consumerKey}" authorizationUrl="${google-beacon.authorizationUrl}" scope="${google-beacon.scope}" accessTokenUrl="${google-beacon.accessTokenUrl}" applicationName="${google-beacon.applicationName}" onNoToken="${google-beacon.onNoToken}" consumerSecret="${google-beacon.consumerSecret}" name="Google-beacon" doc:name="Google-beacon"></google-beacon:config-with-oauth>
+
+<flow name="list-attachments" doc:name="ListAttachments">
+	<google-beacon:list-attachments config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="register-beacon" doc:name="RegisterBeacon">
+	<google-beacon:register-beacon config-ref="Google-beacon" advertisedIdValue="#[flowVars.advertisedIdValue]" >
+		<google-beacon:properties ref="#[flowVars.PropertiesRef]"/>
+	</google-beacon:register-beacon>
+</flow>
+
+<flow name="activate-beacon" doc:name="ActivateBeacon">
+	<google-beacon:activate-beacon config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="deactivate-beacon" doc:name="DeactivateBeacon">
+	<google-beacon:deactivate-beacon config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="decommission-beacon" doc:name="DecommissionBeacon">
+	<google-beacon:decommission-beacon config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="get-beacon-info" doc:name="GetBeaconInfo">
+	<google-beacon:get-beacon-info config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="get-beacons" doc:name="GetBeacons">
+	<google-beacon:get-beacons config-ref="Google-beacon"/>
+</flow>
+
+<flow name="list-beacons" doc:name="ListBeacons">
+	<google-beacon:list-beacons config-ref="Google-beacon" query="#[flowVars.query]" />
+</flow>
+
+<flow name="update-beacon" doc:name="UpdateBeacon">
+	<google-beacon:update-beacon config-ref="Google-beacon" advertisedIdValue="#[flowVars.advertisedIdValue]"  beaconName="#[flowVars.beaconName]" >
+		<google-beacon:properties ref="#[flowVars.PropertiesRef]"/>
+	</google-beacon:update-beacon>
+</flow>
+
+<flow name="create-attachment" doc:name="CreateAttachment">
+	<google-beacon:create-attachment config-ref="Google-beacon" beaconName="#[flowVars.beaconName]"  data="#[flowVars.data]"  ProjectId="#[flowVars.ProjectId]" />
+</flow>
+
+<flow name="batch-delete-attachments" doc:name="BatchDeleteAttachments">
+	<google-beacon:batch-delete-attachments config-ref="Google-beacon" beaconName="#[flowVars.beaconName]" />
+</flow>
+
+<flow name="delete-attachment" doc:name="DeleteAttachment">
+	<google-beacon:delete-attachment config-ref="Google-beacon" beaconName="#[flowVars.beaconName]"  attachmentId="#[flowVars.attachmentId]" />
+</flow>
+
+
+</mule>

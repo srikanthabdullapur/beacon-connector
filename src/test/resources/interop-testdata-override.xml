@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<connector name="Google Beacon">
+    <properties>
+        <connectivity-support>false</connectivity-support>
+        <OAuth-authentication>true</OAuth-authentication>
+        <metadata>static</metadata>
+        <datasense-enabled>true</datasense-enabled>
+        <transformer>false</transformer>
+    </properties>
+    <global-config credentialsFile="">
+        <config name="config-with-oauth">
+            <attributes>
+                <attribute name="name" use="required" caption="Name" group="Basic Settings" type="name" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="consumerKey" use="required" caption="Consumer Key" group="Connection" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="consumerSecret" use="required" caption="Consumer Secret" group="Connection" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </config>
+    </global-config>
+    <message-processors>
+        <processor name="authorize" xmlName="authorize" caption="Authorize">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="unauthorize" xmlName="unauthorize" caption="Unauthorize">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="listAttachments" xmlName="list-attachments" caption="List attachments">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="registerBeacon" xmlName="register-beacon" caption="Register beacon">
+            <properties>
+                <datamapper input="" output="Beacon"/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="advertisedIdValue" use="required" caption="Advertised Id Value" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="activateBeacon" xmlName="activate-beacon" caption="Activate beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="deactivateBeacon" xmlName="deactivate-beacon" caption="Deactivate beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="decommissionBeacon" xmlName="decommission-beacon" caption="Decommission beacon">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="getBeaconInfo" xmlName="get-beacon-info" caption="Get beacon info">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="getBeacons" xmlName="get-beacons" caption="Get beacons">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="listBeacons" xmlName="list-beacons" caption="List beacons">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="query" use="required" caption="Query" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="updateBeacon" xmlName="update-beacon" caption="Update beacon">
+            <properties>
+                <datamapper input="" output="Beacon"/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="advertisedIdValue" use="required" caption="Advertised Id Value" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createAttachment" xmlName="create-attachment" caption="Create attachment">
+            <properties>
+                <datamapper input="" output="BeaconAttachment"/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="data" use="required" caption="Data" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="ProjectId" use="required" caption="Project Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="batchDeleteAttachments" xmlName="batch-delete-attachments" caption="Batch delete attachments">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="deleteAttachment" xmlName="delete-attachment" caption="Delete attachment">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="beaconName" use="required" caption="Beacon Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="attachmentId" use="required" caption="Attachment Id" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+    </message-processors>
+</connector>
